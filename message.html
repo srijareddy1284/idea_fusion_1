@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Messages</h1>
+    </header>
+    <main>
+        <div class="container">
+            
+            <div class="welcome-message">
+                <h3>Welcome, User!</h3>
+                <p>Here is an overview of your messages and collaborations.</p>
+            </div>
+            <div class="message-stats">
+                <div class="stat">
+                    <h4>New Messages</h4>
+                    <p>10</p>
+                </div>
+                <div class="stat">
+                    <h4>Total Conversations</h4>
+                    <p>5</p>
+                </div>
+                <div class="stat">
+                    <h4>Active Collaborations</h4>
+                    <p>3</p>
+                </div>
+            </div>
+            <div class="recent-messages">
+                <h3>Recent Messages</h3>
+                <ul>
+                    <li>Message from John: "Let's discuss the project timeline..."</li>
+                    <li>Message from Alice: "Please review the attached document..."</li>
+                    <li>Message from Bob: "Meeting scheduled for tomorrow at 10 AM..."</li>
+                </ul>
+            </div>
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <button>New Message</button>
+                <button>View All Conversations</button>
+                <button>Start Collaboration</button>
+            </div>
+            <div class="notifications">
+                <h3>Notifications</h3>
+                <p>No new notifications</p>
+            </div>
+            <div class="upcoming-meetings">
+                <h3>Upcoming Meetings</h3>
+                <ul>
+                    <li>Project discussion with John - May 20, 2024</li>
+                    <li>Team meeting - May 22, 2024</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Messages Collaboration Tool Footer</p>
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header, footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+header h1, footer p {
+    margin: 0;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.container {
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 1000px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+    text-align: center;
+    color: #fff;
+}
+
+.welcome-message, .message-stats, .recent-messages, .quick-actions, .notifications, .upcoming-meetings {
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #bbb;
+    margin-bottom: 10px;
+}
+
+p, ul {
+    color: #ccc;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+ul li {
+    margin-bottom: 5px;
+}
+
+.message-stats {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.stat {
+    background-color: #444;
+    padding: 10px;
+    border-radius: 8px;
+    flex: 1;
+    margin: 0 10px;
+}
+
+.stat h4 {
+    color: #bbb;
+}
+
+button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+</style>
+</html>

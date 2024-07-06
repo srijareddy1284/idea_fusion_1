@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Calendar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="calendar-container">
+        <div class="calendar">
+            <header>
+                <button id="prevMonthBtn"><i class="fas fa-chevron-left"></i></button>
+                <h1 id="monthYear"></h1>
+                <button id="nextMonthBtn"><i class="fas fa-chevron-right"></i></button>
+            </header>
+            <div class="weekdays">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <div class="days" id="days"></div>
+        </div>
+    </div>
+
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add Event</h2>
+            <form id="eventForm">
+                <label for="eventTitle">Event Title:</label>
+                <input type="text" id="eventTitle" name="eventTitle" required>
+                <label for="eventDate">Event Date:</label>
+                <input type="date" id="eventDate" name="eventDate" required>
+                <button type="submit">Add Event</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #2f2f2f;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calendar {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 800px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 24px;
+}
+
+header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+header button:hover {
+    color: #999;
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: 600;
+}
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.day {
+    background-color: #444;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+}
+
+.day.current-day {
+    background-color: black;
+}
+
+.day .date {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.day .event {
+    background-color: #888;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #333;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+}
+
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin: 10px 0 5px;
+}
+
+form input,
+form button {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #777;
+}
+
+</style>
+
+<script>
+
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+let currentDate = new Date();
+
+const daysElement = document.getElementById("days");
+const monthYearElement = document.getElementById("monthYear");
+const prevMonthBtn = document.getElementById("prevMonthBtn");
+const nextMonthBtn = document.getElementById("nextMonthBtn");
+const eventModal = document.getElementById("eventModal");
+const closeModalBtn = document.getElementsByClassName("close")[0];
+const eventForm = document.getElementById("eventForm");
+const eventTitleInput = document.getElementById("eventTitle");
+const eventDateInput = document.getElementById("eventDate");
+
+const events = JSON.parse(localStorage.getItem("events")) || [];
+
+function renderCalendar() {
+    daysElement.innerHTML = "";
+    monthYearElement.textContent = `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+
+    const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
+    const lastDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+
+    for (let i = 0; i < firstDay; i++) {
+        const emptyCell = document.createElement("div");
+        emptyCell.className = "day";
+        daysElement.appendChild(emptyCell);
+    }
+
+    for (let i = 1; i <= lastDate; i++) {
+        const dayElement = document.createElement("div");
+        dayElement.className = "day";
+        if (i === new Date().getDate() && currentDate.getMonth() === new Date().getMonth() && currentDate.getFullYear() === new Date().getFullYear()) {
+            dayElement.classList.add("current-day");
+        }
+        const dateElement = document.createElement("div");
+        dateElement.className = "date";
+        dateElement.textContent = i;
+        dayElement.appendChild(dateElement);
+
+        const eventDay = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+        const dayEvents = events.filter(event => event.date === eventDay);
+
+        dayEvents.forEach(event => {
+            const eventElement = document.createElement("div");
+            eventElement.className = "event";
+            eventElement.textContent = event.title;
+            dayElement.appendChild(eventElement);
+        });
+
+        dayElement.addEventListener("click", () => openEventModal(eventDay));
+        daysElement.appendChild(dayElement);
+    }
+}
+
+function prevMonth() {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar();
+}
+
+function nextMonth() {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar();
+}
+
+function openEventModal(date) {
+    eventModal.style.display = "block";
+    eventDateInput.value = date;
+}
+
+function closeEventModal() {
+    eventModal.style.display = "none";
+    eventForm.reset();
+}
+
+eventForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const newEvent = {
+        title: eventTitleInput.value,
+        date: eventDateInput.value,
+    };
+    events.push(newEvent);
+    localStorage.setItem("    events", JSON.stringify(events));
+    closeEventModal();
+    renderCalendar();
+});
+
+closeModalBtn.addEventListener("click", closeEventModal);
+window.addEventListener("click", (e) => {
+    if (e.target == eventModal) {
+        closeEventModal();
+    }
+});
+
+prevMonthBtn.addEventListener("click", prevMonth);
+nextMonthBtn.addEventListener("click", nextMonth);
+
+renderCalendar();
+
+
+</script>
+</html>

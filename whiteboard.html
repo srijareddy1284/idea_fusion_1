@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Whiteboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="toolbar">
+        <button id="pencilBtn">Pencil</button>
+        <button id="eraserBtn">Eraser</button>
+        <input type="color" id="colorPicker">
+        <input type="range" id="thicknessSlider" min="1" max="10" value="2">
+        <button id="undoBtn">Undo</button>
+        <button id="redoBtn">Redo</button>
+        <button id="saveBtn">Save</button>
+    </div>
+    <canvas id="whiteboard"></canvas>
+
+    <style>
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    margin: 0;
+    height: 100vh;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: #333;
+    width: 100%;
+}
+
+.toolbar button, .toolbar input {
+    margin: 0 5px;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.toolbar button {
+    background-color: #555;
+    color: white;
+}
+
+.toolbar button:hover {
+    background-color: #777;
+}
+
+canvas {
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    background-color: white;
+}
+
+    </style>
+    <script>
+
+const canvas = document.getElementById('whiteboard');
+const ctx = canvas.getContext('2d');
+const pencilBtn = document.getElementById('pencilBtn');
+const eraserBtn = document.getElementById('eraserBtn');
+const colorPicker = document.getElementById('colorPicker');
+const thicknessSlider = document.getElementById('thicknessSlider');
+const undoBtn = document.getElementById('undoBtn');
+const redoBtn = document.getElementById('redoBtn');
+const saveBtn = document.getElementById('saveBtn');
+
+canvas.width = window.innerWidth - 20;
+canvas.height = window.innerHeight - 100;
+
+let drawing = false;
+let erasing = false;
+let currentColor = '#000000';
+let currentThickness = 2;
+let history = [];
+let historyIndex = -1;
+
+function startDrawing(e) {
+    drawing = true;
+    ctx.beginPath();
+    ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+    addHistory();
+}
+
+function draw(e) {
+    if (!drawing) return;
+    ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+    ctx.strokeStyle = erasing ? '#ffffff' : currentColor;
+    ctx.lineWidth = currentThickness;
+    ctx.stroke();
+}
+
+function stopDrawing() {
+    drawing = false;
+}
+
+function addHistory() {
+    history = history.slice(0, historyIndex + 1);
+    history.push(canvas.toDataURL());
+    historyIndex++;
+}
+
+function undo() {
+    if (historyIndex <= 0) return;
+    historyIndex--;
+    let img = new Image();
+    img.src = history[historyIndex];
+    img.onload = () => ctx.drawImage(img, 0, 0);
+}
+
+function redo() {
+    if (historyIndex >= history.length - 1) return;
+    historyIndex++;
+    let img = new Image();
+    img.src = history[historyIndex];
+    img.onload = () => ctx.drawImage(img, 0, 0);
+}
+
+function saveCanvas() {
+    const link = document.createElement('a');
+    link.download = 'whiteboard.png';
+    link.href = canvas.toDataURL();
+    link.click();
+}
+
+pencilBtn.addEventListener('click', () => {
+    erasing = false;
+});
+
+eraserBtn.addEventListener('click', () => {
+    erasing = true;
+});
+
+colorPicker.addEventListener('change', (e) => {
+    currentColor = e.target.value;
+});
+
+thicknessSlider.addEventListener('change', (e) => {
+    currentThickness = e.target.value;
+});
+
+undoBtn.addEventListener('click', undo);
+redoBtn.addEventListener('click', redo);
+saveBtn.addEventListener('click', saveCanvas);
+
+canvas.addEventListener('mousedown', startDrawing);
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', stopDrawing);
+canvas.addEventListener('mouseout', stopDrawing);
+
+    </script>
+</body>
+</html>

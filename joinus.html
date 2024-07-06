@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Us</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Idea Fusion Logo">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="aboutus.html">About Us</a>
+                <a href="joinus.html">Join us</a>
+                
+                
+                <a class="userprofile" href="userprofile.php">U</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="content">
+        <main style="top:0%">
+            <div class="content-container">
+                <div class="idea-box">
+                    <div class="idea">
+                        <h1><b>Submit Your Project Idea</b></h1>
+                        <h3><i>Got a cool idea that can make a difference? We're all ears at Idea Fusion! We turn imaginative ideas into real things—be it a game-changing app, a project for social good, or anything creative. Your idea could be the next big hit! Share it with us, and let's make it happen.</i></h3>
+                        <a class="anc" href="innovatenow.php">Innovate Now</a>
+                    </div>
+                </div>
+
+                <div class="implementor-box">
+                    <div class="impl">
+                        <h1><b>Join as Project Implementor</b></h1>
+                        <h3><i>Got skills and ready for exciting projects? Join us as a Project Implementor at Idea Fusion! Be part of turning visionary ideas into real solutions. Contribute your expertise and collaborate with innovative minds worldwide. Your chance to make a mark in just a few clicks!</i></h3>
+                        <a class="anc" href="startimplementing.php">Start Implementing</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="contact-info">
+            <p>Email: <a href="mailto:info@example.com">srijareddypatlolla128@gmail.com</a></p>
+        </div>
+        <div>
+            <p>Contact Us: +919704802196</p>
+        </div>
+        <div class="social-media">
+            <a href="#" target="_blank">Facebook</a>
+            <a href="#" target="_blank">Twitter</a>
+            <a href="#" target="_blank">Instagram</a>
+        </div>
+        <div class="legal-links">
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+        <div class="quicklink">
+            <p>Quicklinks</p>
+            <a href="home.html">Home</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="joinus.html">Join us</a>
+            <a href="signup.html">Signup</a>
+        </div>
+    </footer>
+</body>
+
+<style>
+    /* General styles */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Header styles */
+    .logo {
+        text-align: left;
+        padding: 0px;
+        background-color: black;
+        display: flex;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    header {
+        background-color: black;
+        color: black;
+        text-align: left;
+        padding: 10px 10px 20px;
+    }
+
+    nav {
+        justify-content: left;
+        margin: 50px 0px 0px 780px;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        margin: 0 10px;
+        transition: background-color 0.3s, text-decoration 0.3s;
+    }
+
+    nav a:hover {
+        background-color: transparent;
+        text-decoration: underline;
+    }
+
+    /* Content styles */
+    .content-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        margin-top: 0px;
+        padding: 100px;
+        background-color: gray;
+    }
+
+    .content-container .idea-box,
+    .content-container .implementor-box {
+        width: 48%; /* Adjust the width as needed */
+        margin: 0px; /* Add margin between the boxes */
+    }
+
+   
+    /* New styles for the container */
+    .idea-box,
+    .implementor-box {
+        background-color: grey;
+        padding: 20px;
+        margin:0px 0px 0px 0px;
+        border-color:black;
+    }
+
+    /* Media query for smaller screens */
+    @media only screen and (max-width: 600px) {
+        .content-container {
+            flex-direction: column;
+        }
+
+        .idea-box,
+        .implementor-box {
+            width: 100%;
+            margin: 10px 10px;
+           
+        }
+    }
+
+    section {
+        font-style: italic;
+        padding: 10px;
+    }
+
+    /* Footer styles */
+    footer {
+        background-color: black;
+        color: white;
+        padding: 20px;
+        margin-block-start: auto;
+    }
+
+    .contact-info,
+    .legal-links,
+    .social-media {
+        margin-bottom: 15px;
+    }
+
+    .social-media a {
+        color: white;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+    .quicklink {
+        margin-top: 10px;
+    }
+
+    /* Media query for smaller screens */
+    @media only screen and (max-width: 600px) {
+        nav {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav a {
+            margin: 5px 0;
+        }
+
+        .content-container {
+            background-size: auto;
+            padding: 10px;
+        }
+
+        section {
+            margin-left: 0;
+        }
+
+        .quicklink {
+            position: static;
+            margin-top: 10px;
+        }
+    }
+</style>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>collaboration tools</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1> Collaboration Tools</h1>
+    </header>
+    <main>
+        <div class="container">
+            <div class="box" onclick="redirectTo('dashboard.html')">Dashboard</div>
+            <div class="box" onclick="redirectTo('message.html')">Messages</div>
+            <div class="box" onclick="redirectTo('tasks.html')">Tasks</div>
+            <div class="box" onclick="redirectTo('calendar.html')">Calendar</div>
+            <div class="box" onclick="redirectTo('whiteboard.html')">Whiteboard</div>
+            <div class="box" onclick="redirectTo('settings.html')">Settings</div>
+        </div>
+    </main>
+    <footer>
+        
+    </footer>
+    <script src="scripts.js">
+       
+
+    </script>
+</body>
+<style>
+    body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+header, footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+header h1 {
+    margin: 0;
+}
+
+footer p {
+    margin: 0;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+    color: black;
+    font-size: 30px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    padding: 20px;
+}
+
+.box:hover {
+    background-color: grey;
+}
+
+</style>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Tasks</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Project Tasks Tool</h1>
+    </header>
+    <main>
+        <div class="container">
+           
+            <div class="welcome-message">
+                <h3>Welcome, User!</h3>
+                <p>Here is an overview of your tasks and project status.</p>
+            </div>
+            <div class="task-stats">
+                <div class="stat">
+                    <h4>Tasks To Do</h4>
+                    <p>12</p>
+                </div>
+                <div class="stat">
+                    <h4>In Progress</h4>
+                    <p>5</p>
+                </div>
+                <div class="stat">
+                    <h4>Completed</h4>
+                    <p>8</p>
+                </div>
+            </div>
+            <div class="recent-tasks">
+                <h3>Recent Tasks</h3>
+                <ul>
+                    <li>Task A - Due date: May 15, 2024</li>
+                    <li>Task B - In progress</li>
+                    <li>Task C - Completed</li>
+                </ul>
+            </div>
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <button>New Task</button>
+                <button>View All Tasks</button>
+                <button>Update Task</button>
+            </div>
+            <div class="notifications">
+                <h3>Notifications</h3>
+                <p>No new notifications</p>
+            </div>
+            <div class="upcoming-deadlines">
+                <h3>Upcoming Deadlines</h3>
+                <ul>
+                    <li>Project X deadline - May 20, 2024</li>
+                    <li>Task Y review - May 22, 2024</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Project Tasks Tool Footer</p>
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header, footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+header h1, footer p {
+    margin: 0;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.container {
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 1000px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+    text-align: center;
+    color: #fff;
+}
+
+.welcome-message, .task-stats, .recent-tasks, .quick-actions, .notifications, .upcoming-deadlines {
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #bbb;
+    margin-bottom: 10px;
+}
+
+p, ul {
+    color: #ccc;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+ul li {
+    margin-bottom: 5px;
+}
+
+.task-stats {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.stat {
+    background-color: #444;
+    padding: 10px;
+    border-radius: 8px;
+    flex: 1;
+    margin: 0 10px;
+}
+
+.stat h4 {
+    color: #bbb;
+}
+
+button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+</style>
+</html>
